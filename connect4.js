@@ -149,7 +149,7 @@ function handleClick(evt) {
   }
   // switch players
   currPlayer = currPlayer === 1 ? 2 : 1;
-  updateGameState(`Player ${currPlayer === 1 ? "one" : "two"}'s turn`);
+  updateGameState(`Player ${currPlayer}'s turn`);
   evt.target.style.backgroundColor = currColor();
 }
 
