@@ -14,6 +14,10 @@ let gameState = document.querySelector("#game-state");
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
+const currColor = () => {
+  return currPlayer === 1 ? "var(--red)" : "var(--yellow)";
+};
+
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -39,6 +43,14 @@ function makeHtmlBoard() {
     const headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
+    headCell.addEventListener("mouseenter", (e) => {
+      console.log(e.target, "mouseenter");
+      e.target.style.backgroundColor = currColor();
+    });
+    headCell.addEventListener("mouseleave", (e) => {
+      console.log(e.target, "mouseleave");
+      e.target.style.backgroundColor = "lightgray";
+    });
   }
   htmlBoard.append(top);
 
@@ -138,6 +150,7 @@ function handleClick(evt) {
   // switch players
   currPlayer = currPlayer === 1 ? 2 : 1;
   updateGameState(`Player ${currPlayer === 1 ? "one" : "two"}'s turn`);
+  evt.target.style.backgroundColor = currColor();
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
